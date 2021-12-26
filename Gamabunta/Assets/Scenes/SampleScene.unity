@@ -1588,10 +1588,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 132b3da46779e2145a92c1e796d10ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  jumpHeight: 1.5
-  dashSpeed: 40
-  dashFullTime: 3
+  moveSpeed: 7
+  runSpeed: 10
+  stamina: 2
+  jumpHeight: 2
+  dashSpeed: 60
+  dashFullTime: 0.2
   dashTime: 0
   gravity: -20
   groundDistance: 0.6

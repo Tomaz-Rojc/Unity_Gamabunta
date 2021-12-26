@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 2.0f;
+    private float speed;
+    public float moveSpeed = 2f;
+    public float runSpeed = 4f;
+    public float stamina = 2f;
     public float jumpHeight = 3f;
     private bool canDoubleJump = false;
     private bool doubleJumped = false;
@@ -27,16 +30,18 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         dashTime = dashFullTime;
+        speed = moveSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {   
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        
-        // reset gravity
+        float ha = Input.GetAxis("Horizontal");
+        float va = Input.GetAxis("Vertical");
+
+        // reset fall speed
         if (isGrounded && velocity.y < 0) {
-            Debug.Log("Grounded");
             velocity.y = 0f;
         }
 
@@ -49,13 +54,51 @@ public class PlayerController : MonoBehaviour
         if(isGrounded && Input.GetKeyDown(KeyCode.Space)) {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
+        if (!isGrounded && !doubleJumped) {
+			canDoubleJump = true;
+		}
+        if (canDoubleJump && Input.GetKeyDown(KeyCode.Space)) {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            canDoubleJump = false;
+            doubleJumped = true;
+            canDash = true;
+        }
 
-        float ha = Input.GetAxis("Horizontal");
-        float va = Input.GetAxis("Vertical");
+        // reset x, z velocity
+        if (!isDashing) {
+            velocity.x = 0f;
+            velocity.z = 0f;
+        }
 
-        Vector3 move = transform.right * ha + transform.forward * va;
-        controller.Move(move * moveSpeed * Time.deltaTime);
+        // dash activation
+        if (canDash && dashTime <= 0 && Input.GetKeyDown(KeyCode.LeftControl)) {
+            velocity += (transform.right * ha + transform.forward * va) * dashSpeed;
+            dashTime = dashFullTime;
+            canDash = false;
+            isDashing = true;
+        }
 
+        // handle running
+        if (Input.GetKey(KeyCode.LeftShift) && stamina > 0) {
+            stamina -= Time.deltaTime;
+            if (stamina > 0.2f) speed = runSpeed;
+        } else {
+            speed = moveSpeed;
+            if (stamina < 2) stamina += Time.deltaTime;
+        }
+    	// move left, right, forward, backward
+        if (!isDashing) {
+            Vector3 move = transform.right * ha + transform.forward * va;
+            controller.Move(move * speed * Time.deltaTime);
+        }
+
+        dashTime -= Time.deltaTime;
+        if (isDashing && dashTime <= 0) {
+        // dash just ended
+            isDashing = false;
+        }
+
+        // add gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
