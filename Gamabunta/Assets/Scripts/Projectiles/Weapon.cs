@@ -10,7 +10,7 @@ public class Weapon : MonoBehaviour
     public float shootForce, upwardForce;
 
     // Projectile stats
-    public float timeBetweenShooting, spread, reloadTime, timeBetweenShots;
+    public float timeBetweenShooting, spread, reloadTime, timeBetweenShots, damage;
     public int magazineSize, bulletsPerTap;
     public bool allowButtonHold;
 
@@ -22,6 +22,9 @@ public class Weapon : MonoBehaviour
     // Reference
     public Camera fpsCam;
     public Transform attackPoint;
+
+    // Enemies
+    public BoxCollider enemyHitbox;
 
     // Graphics
     public GameObject muzzleFlash;
@@ -113,7 +116,7 @@ public class Weapon : MonoBehaviour
         }
 
         // if more than one bulletsPerTap make sure to repeat shoot function
-        if (bulletsShot < bulletsPerTap && bulletsLeft > 0)
+        if (bulletsShot + 1 < bulletsPerTap && bulletsLeft > 0)
             Invoke("Shoot", timeBetweenShots);
 
         bulletsLeft--;
