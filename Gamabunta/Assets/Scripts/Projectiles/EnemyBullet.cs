@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class EnemyBullet : MonoBehaviour
 {
     public Rigidbody rb;
     public GameObject explosion;
@@ -40,7 +40,7 @@ public class Bullet : MonoBehaviour
         Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);
         for (int i = 0; i < enemies.Length; i++)
         {
-            enemies[i].GetComponentInParent<Enemy>().TakeDamage(explosionDamage);
+            enemies[i].GetComponent<Player>().TakeDamage(explosionDamage);
             Debug.Log(enemies[i]);
         }
         Invoke("Delay", 0.05f);
