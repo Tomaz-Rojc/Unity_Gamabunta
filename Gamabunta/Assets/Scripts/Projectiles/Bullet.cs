@@ -54,6 +54,10 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Enemy") && explodeOnTouch) Explode();
+        if (collision.collider.CompareTag("Crate") && explodeOnTouch) {
+            Destroy(collision.gameObject);
+            Explode();
+        }
     }
 
     private void Setup()

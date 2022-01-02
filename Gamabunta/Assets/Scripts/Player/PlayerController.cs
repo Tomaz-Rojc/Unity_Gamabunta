@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private bool doubleJumped = false;
     public float dashSpeed = 40f;
     public float dashFullTime = 3f;
+    public float dashCooldown = 0.5f;
     public float dashTime;
     private bool canDash = true;
     private bool isDashing = false;
@@ -52,16 +53,20 @@ public class PlayerController : MonoBehaviour
 			canDash = true;
         }
         if(isGrounded && Input.GetKeyDown(KeyCode.Space)) {
+            MySoundManager.PlaySound("jump");
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            dashTime = -dashCooldown;
         }
         if (!isGrounded && !doubleJumped) {
 			canDoubleJump = true;
 		}
         if (canDoubleJump && Input.GetKeyDown(KeyCode.Space)) {
+            MySoundManager.PlaySound("jump");
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             canDoubleJump = false;
             doubleJumped = true;
             canDash = true;
+            dashTime = -dashCooldown;
         }
 
         // reset x, z velocity
@@ -71,7 +76,8 @@ public class PlayerController : MonoBehaviour
         }
 
         // dash activation
-        if (canDash && dashTime <= 0 && Input.GetKeyDown(KeyCode.LeftControl)) {
+        if (canDash && dashTime <= -dashCooldown && Input.GetKeyDown(KeyCode.LeftControl)) {
+            MySoundManager.PlaySound("dash");
             velocity += (transform.right * ha + transform.forward * va) * dashSpeed;
             dashTime = dashFullTime;
             canDash = false;
