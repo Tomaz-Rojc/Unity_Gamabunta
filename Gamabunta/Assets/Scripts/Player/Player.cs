@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -19,8 +20,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (health <= 0)
-            Destroy(gameObject);
+        if (health <= 0) {
+            Cursor.lockState = CursorLockMode.None;
+            SceneManager.LoadScene("Death");
+        }
 
         if (health > maxHealth)
             health = maxHealth;
