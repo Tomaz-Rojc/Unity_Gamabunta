@@ -16,14 +16,14 @@ public class FrogController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         
-        for (int i = 0; i < 100; i++) {
-            Invoke("Tongue", i*pauseFor);
-        }
+        // for (int i = 0; i < 100; i++) {
+        //     Invoke("Tongue", i*pauseFor);
+        // }
     }
 
     void Update()
     {
-        
+        Crawl();
     }
 
     private void OnTriggerEnter(Collider coll) {
