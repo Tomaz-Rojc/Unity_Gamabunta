@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,6 +26,10 @@ public class PlayerController : MonoBehaviour
 
     public CharacterController controller;
     public Transform groundCheck;
+
+    // Player UI
+    public Slider dashSldier;
+    public Slider staminaSlider;
         
 
     // Start is called before the first frame update
@@ -107,5 +112,14 @@ public class PlayerController : MonoBehaviour
         // add gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
+        // Update slider values
+        calculateSliders();
+    }
+
+    private void calculateSliders()
+    {
+        dashSldier.value = -dashTime * 2;
+        staminaSlider.value = stamina / 2;
     }
 }

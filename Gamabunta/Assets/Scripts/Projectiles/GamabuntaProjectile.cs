@@ -4,7 +4,7 @@ public class GamabuntaProjectile : MonoBehaviour
 {
     public Rigidbody rb;
     public GameObject explosion;
-    public LayerMask whatIsPlayer;
+    public LayerMask whatIsEnemies;
 
     [Range(0f, 1f)]
     public float bounciness;
@@ -20,6 +20,8 @@ public class GamabuntaProjectile : MonoBehaviour
     int collisions;
     PhysicMaterial physics_mat;
 
+    private bool exploded = false;
+
     private void Start()
     {
         Setup();
@@ -27,20 +29,24 @@ public class GamabuntaProjectile : MonoBehaviour
 
     private void Update()
     {
-        if (collisions > maxCollisions) Explode();
+        // if (collisions > maxCollisions) Explode();
 
-        maxLifetime -= Time.deltaTime;
-        if (maxLifetime <= 0) Explode();
+        // maxLifetime -= Time.deltaTime;
+        // if (maxLifetime <= 0) Explode();
     }
 
     private void Explode()
     {
+        exploded = true;
+
         if (explosion != null) Instantiate(explosion, transform.position, Quaternion.identity);
 
-        Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsPlayer); 
+        Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies); 
         for (int i = 0; i < enemies.Length; i++)
         {
-            enemies[i]?.GetComponent<Player>().TakeDamage(explosionDamage);
+            Debug.Log(enemies[i].name);
+            enemies[i].GetComponent<Player>().TakeDamage(explosionDamage);
+            
         }
         Invoke("Delay", 0.05f);
     }
@@ -52,7 +58,7 @@ public class GamabuntaProjectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Player") && explodeOnTouch) Explode();
+        if ((collision.collider.CompareTag("Player") || !collision.collider.CompareTag("Gamabunta")) && explodeOnTouch && !exploded) Explode();
     }
 
     private void Setup()
