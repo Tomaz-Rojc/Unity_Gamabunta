@@ -9,8 +9,15 @@ public class Enemy : MonoBehaviour
     public float maxHealth;
     public int armor = 0;
 
+    public Player player;
+
     public GameObject healthBarUI;
     public Slider slider;
+
+    public GameObject weapon;
+
+    public int restoreMana;
+    public int restoreHealth;
 
     void Start()
     {
@@ -26,7 +33,11 @@ public class Enemy : MonoBehaviour
             healthBarUI.SetActive(true);
 
         if (health <= 0)
+        {
             Destroy(gameObject);
+            player.GetComponentInChildren<Weapon>().bulletsLeft += restoreMana;
+            player.health += restoreHealth;
+        }
 
         if (health > maxHealth)
             health = maxHealth;

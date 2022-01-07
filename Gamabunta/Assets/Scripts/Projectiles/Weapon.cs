@@ -10,11 +10,11 @@ public class Weapon : MonoBehaviour
     public float shootForce, upwardForce;
 
     // Projectile stats
-    public float timeBetweenShooting, spread, reloadTime, timeBetweenShots, damage;
+    public float timeBetweenShooting, spread, reloadTime, timeBetweenShots;
     public int magazineSize, bulletsPerTap;
     public bool allowButtonHold;
 
-    int bulletsLeft, bulletsShot;
+    public int bulletsLeft, bulletsShot;
 
     // bools
     bool shooting, readyToShoot, reloading;
@@ -46,7 +46,7 @@ public class Weapon : MonoBehaviour
 
         // Ammo GUI
         if (ammunitionDisplay != null)
-            ammunitionDisplay.SetText(bulletsLeft / bulletsPerTap + " / " + magazineSize / bulletsPerTap);
+            ammunitionDisplay.SetText("Mana: " + bulletsLeft + " / " + magazineSize);
     }
 
     private void MyInput()
@@ -56,9 +56,9 @@ public class Weapon : MonoBehaviour
         else shooting = Input.GetKeyDown(KeyCode.Mouse0);
 
         // Reloading
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading) Reload();
+        // if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading) Reload();
         // Auto reload
-        if (readyToShoot && shooting && !reloading && bulletsLeft <= 0) Reload();
+        // if (readyToShoot && shooting && !reloading && bulletsLeft <= 0) Reload();
 
         // Shooting
         if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
@@ -101,8 +101,8 @@ public class Weapon : MonoBehaviour
         currentBullet.transform.forward = directionWithSpread.normalized;
 
         // Add force to bullet
-        currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
-        currentBullet.GetComponent<Rigidbody>().AddForce(fpsCam.transform.up * upwardForce, ForceMode.Impulse);
+        currentBullet.GetComponentInChildren<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
+        currentBullet.GetComponentInChildren<Rigidbody>().AddForce(fpsCam.transform.up * upwardForce, ForceMode.Impulse);
 
         // Instantiate muzzle flash
         if (muzzleFlash != null)

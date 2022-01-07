@@ -53,6 +53,7 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log(collision.collider.tag);
         if (collision.collider.CompareTag("Enemy") && explodeOnTouch) Explode();
         if (collision.collider.CompareTag("Crate") && explodeOnTouch) {
             Destroy(collision.gameObject);
@@ -67,7 +68,7 @@ public class Bullet : MonoBehaviour
         physics_mat.frictionCombine = PhysicMaterialCombine.Minimum;
         physics_mat.bounceCombine = PhysicMaterialCombine.Maximum;
 
-        GetComponent<SphereCollider>().material = physics_mat;
+        GetComponentInChildren<SphereCollider>().material = physics_mat;
 
         rb.useGravity = useGravity;
     }

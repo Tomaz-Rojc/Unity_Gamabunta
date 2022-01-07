@@ -20,7 +20,75 @@ namespace DigitalRuby.PyroParticles
 
         public void OnCollisionEnter(Collision col)
         {
-            // CollisionHandler.HandleCollision(gameObject, col);
+            // if (col.collider.CompareTag("Crate") && explodeOnTouch) Destroy(col.gameObject);
+            
+            CollisionHandler.HandleCollision(gameObject, col);
+            DealDamage();
+        }
+
+        public Rigidbody rb;
+        public GameObject explosion;
+        public LayerMask whatIsEnemies;
+        public LayerMask whatIsCrates;
+
+        [Range(0f, 1f)]
+        public float bounciness;
+        public bool useGravity;
+
+        public int explosionDamage;
+        public float explosionRange;
+
+        public int maxCollisions;
+        public float maxLifetime;
+        public bool explodeOnTouch = true;
+
+        int collisions;
+        PhysicMaterial physics_mat;
+
+        private void Start()
+        {
+            Setup();
+        }
+
+        private void Update()
+        {
+
+        }
+
+        private void DealDamage()
+        {
+            Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);
+            Collider[] crates = Physics.OverlapSphere(transform.position, explosionRange, whatIsCrates);
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                enemies[i].GetComponentInParent<Enemy>().TakeDamage(explosionDamage);
+            }
+            for (int i = 0; i < crates.Length; i++)
+            {
+                Debug.Log(crates[i].tag);
+                if (crates[i].tag == "Crate")
+                {
+                    Debug.Log(crates[i]);
+                };
+            }
+        }
+
+        private void Setup()
+        {
+            physics_mat = new PhysicMaterial();
+            physics_mat.bounciness = bounciness;
+            physics_mat.frictionCombine = PhysicMaterialCombine.Minimum;
+            physics_mat.bounceCombine = PhysicMaterialCombine.Maximum;
+
+            GetComponentInChildren<SphereCollider>().material = physics_mat;
+
+            rb.useGravity = useGravity;
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, explosionRange);
         }
     }
 }
