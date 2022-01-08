@@ -53,7 +53,6 @@ public class Player : MonoBehaviour
         if (damage <= 0) damage = 1;
         health -= damage;
 
-        Debug.Log("Damage taken");
         bloodEffect();
     }
 
