@@ -185,7 +185,8 @@ public class SapphiArtChan_AnimManager : MonoBehaviour {
                 _SapphiArtChanAnimation != "walk" &&
                 _SapphiArtChanAnimation != "running" &&
                 _SapphiArtChanAnimation != "ko_big" &&
-                _SapphiArtChanAnimation != "winpose"
+                _SapphiArtChanAnimation != "winpose" &&
+                _SapphiArtChanAnimation != "running"
                 )
             {
                 SetAllAnimationFlagsToFalse();
