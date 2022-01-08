@@ -22,11 +22,31 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
         pauseMenu.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
+
+        GameObject[] fires = GameObject.FindGameObjectsWithTag("Fire");
+        foreach (GameObject fire in fires) {
+            fire.GetComponent<AudioSource>().Stop();
+        }
+
+        GameObject[] fires2 = GameObject.FindGameObjectsWithTag("SmallFire");
+        foreach (GameObject fire in fires2) {
+            fire.transform.GetChild(2).GetComponent<AudioSource>().Stop();
+        }
     }
 
     public void DisablePause() {
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
+
+        GameObject[] fires = GameObject.FindGameObjectsWithTag("Fire");
+        foreach (GameObject fire in fires) {
+            fire.GetComponent<AudioSource>().Play();
+        }
+
+        GameObject[] fires2 = GameObject.FindGameObjectsWithTag("SmallFire");
+        foreach (GameObject fire in fires2) {
+            fire.transform.GetChild(2).GetComponent<AudioSource>().Play();
+        }
     }
 }
