@@ -9,6 +9,7 @@ TagManager:
   - Crate
   - Guts
   - Gamabunta
+  - Fire
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - WhatIsEnemy
   - WhatIsBullet
   - WhatIsPlayer
-  - 
+  - FireLayer
   - 
   - 
   - 

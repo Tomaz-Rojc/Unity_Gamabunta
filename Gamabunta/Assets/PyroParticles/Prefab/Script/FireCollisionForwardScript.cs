@@ -26,8 +26,6 @@ namespace DigitalRuby.PyroParticles
             DealDamage();
         }
 
-        public Rigidbody rb;
-        public GameObject explosion;
         public LayerMask whatIsEnemies;
         public LayerMask whatIsCrates;
 
@@ -61,7 +59,14 @@ namespace DigitalRuby.PyroParticles
             Collider[] crates = Physics.OverlapSphere(transform.position, explosionRange, whatIsCrates);
             for (int i = 0; i < enemies.Length; i++)
             {
-                enemies[i].GetComponentInParent<Enemy>().TakeDamage(explosionDamage);
+                if (enemies[i].tag == "Player")
+                {
+                    enemies[i].GetComponentInParent<Player>().TakeDamage(explosionDamage);
+                }
+                else
+                {
+                    enemies[i].GetComponentInParent<Enemy>().TakeDamage(explosionDamage);
+                }
             }
             for (int i = 0; i < crates.Length; i++)
             {
@@ -81,8 +86,6 @@ namespace DigitalRuby.PyroParticles
             physics_mat.bounceCombine = PhysicMaterialCombine.Maximum;
 
             GetComponentInChildren<SphereCollider>().material = physics_mat;
-
-            rb.useGravity = useGravity;
         }
 
         private void OnDrawGizmosSelected()

@@ -30,11 +30,18 @@ public class PlayerController : MonoBehaviour
     // Player UI
     public Slider dashSldier;
     public Slider staminaSlider;
+
+    public float turnSmoothTIme = 0.1f;
+    float turnSmoothVelocity;
+    public Transform cam;
+
+    bool isMoving = false;
         
 
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         dashTime = dashFullTime;
         speed = moveSpeed;
     }
@@ -97,10 +104,32 @@ public class PlayerController : MonoBehaviour
             speed = moveSpeed;
             if (stamina < 2) stamina += Time.deltaTime;
         }
+
+        // check if AWSD is pressed
+        if (
+            Input.GetKey(KeyCode.A) ||
+            Input.GetKey(KeyCode.W) ||
+            Input.GetKey(KeyCode.S) ||
+            Input.GetKey(KeyCode.D)
+            )
+        {
+            isMoving = true;
+        } else
+        {
+            isMoving = false;
+        }
+
     	// move left, right, forward, backward
-        if (!isDashing) {
-            Vector3 move = transform.right * ha + transform.forward * va;
-            controller.Move(move * speed * Time.deltaTime);
+        if (!isDashing && isMoving) {
+            // Vector3 move = transform.right * ha + transform.forward * va;
+            Vector3 move = new Vector3(ha, 0f, va).normalized;
+            // controller.Move(move * speed * Time.deltaTime);
+
+            float targetAngle = Mathf.Atan2(move.x, move.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTIme);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            controller.Move(moveDir.normalized * speed * Time.deltaTime);
         }
 
         dashTime -= Time.deltaTime;
