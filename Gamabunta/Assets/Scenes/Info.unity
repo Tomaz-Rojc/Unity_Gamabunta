@@ -594,7 +594,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: b5ac8a51e17939944a38acec7345a637, type: 3}
-    m_FontSize: 31
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -608,21 +608,20 @@ MonoBehaviour:
   m_Text: 'Description:
 
     The goal of the game is to collect keys, found in crates
-    (that can be destroyed with weapons) or in the environment. When you collect
-    five of them you have to defeat the final boss, frog Gamabunta.
+    or in the environment. When you collect five of them you have to defeat the final
+    boss, frog Gamabunta.
 
 
     Controlls:
 
-    mouse
-    - look, shoot
+    mouse - look, shoot
 
-    W, A, S, D - move
+    W, A, S,
+    D - move
 
     Space - jump, double jump
 
-    Shift
-    - run
+    Shift - run
 
     Ctrl - dash'
 --- !u!222 &1556875489
