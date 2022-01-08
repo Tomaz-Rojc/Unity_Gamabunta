@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class Weapon : MonoBehaviour
@@ -11,10 +12,12 @@ public class Weapon : MonoBehaviour
 
     // Projectile stats
     public float timeBetweenShooting, spread, reloadTime, timeBetweenShots;
-    public int magazineSize, bulletsPerTap;
+    public float magazineSize, bulletsPerTap;
     public bool allowButtonHold;
 
-    public int bulletsLeft, bulletsShot;
+    public float bulletsLeft, bulletsShot;
+
+    public Slider manaSlider;
 
     // bools
     bool shooting, readyToShoot, reloading;
@@ -49,6 +52,8 @@ public class Weapon : MonoBehaviour
         // Ammo GUI
         if (ammunitionDisplay != null)
             ammunitionDisplay.SetText("Mana: " + bulletsLeft + " / " + magazineSize);
+
+        manaSlider.value = bulletsLeft/magazineSize;
     }
 
     private void MyInput()
