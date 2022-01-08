@@ -91,8 +91,8 @@ public class FinalBoss : MonoBehaviour
             // GameObject.Find("Gamabunta").GetComponent<FrogController>().Invoke("Tongue", 1f);
             frogController.Tongue();
             // Attack code
-            Rigidbody rb = Instantiate(projectile, transform.position + new Vector3(0, 4, 0), Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 20f, ForceMode.Impulse);
+            Rigidbody rb = Instantiate(projectile, transform.position + new Vector3(0, 4, -1), Quaternion.identity).GetComponent<Rigidbody>();
+            rb.AddForce(transform.forward * 40f, ForceMode.Impulse);
             rb.AddForce(transform.up * -4f, ForceMode.Impulse);
 
             alreadyAttacked = true;
