@@ -38,6 +38,7 @@ public class Enemy : MonoBehaviour
         {
             if (gameObject.tag == "Gamabunta") {
                 youWon.SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
                 // add guts animation
             } else {
                 Destroy(gameObject);
