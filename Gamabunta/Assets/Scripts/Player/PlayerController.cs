@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour
     public Transform cam;
 
     bool isMoving = false;
+
+    public AnimationManagerUI anim;
         
 
     // Start is called before the first frame update
@@ -114,6 +116,7 @@ public class PlayerController : MonoBehaviour
             )
         {
             isMoving = true;
+            anim.SetAnimation_Walk();
         } else
         {
             isMoving = false;

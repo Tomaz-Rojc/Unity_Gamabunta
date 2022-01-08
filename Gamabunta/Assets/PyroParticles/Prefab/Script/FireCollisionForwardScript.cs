@@ -21,7 +21,7 @@ namespace DigitalRuby.PyroParticles
         public void OnCollisionEnter(Collision col)
         {
             // if (col.collider.CompareTag("Crate") && explodeOnTouch) Destroy(col.gameObject);
-            
+
             CollisionHandler.HandleCollision(gameObject, col);
             DealDamage();
         }
