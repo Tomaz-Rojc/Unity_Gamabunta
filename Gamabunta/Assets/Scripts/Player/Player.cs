@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
         if (healthDisplay != null)
             healthDisplay.SetText("Health: " + health + " / " + maxHealth);
         if (keysDisplay != null)
-            keysDisplay.SetText("Keys: " + keys);
+            keysDisplay.SetText("Keys: " + keys + " / 5");
         if (keys >= 5) {
             BossDoorAnimator.SetBool("openBossDoor", true);
             GameObject.Find("Gamabunta").GetComponent<FinalBoss>().enabled = true;
