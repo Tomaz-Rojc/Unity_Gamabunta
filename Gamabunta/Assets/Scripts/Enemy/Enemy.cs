@@ -21,6 +21,8 @@ public class Enemy : MonoBehaviour
 
     public GameObject youWon;
 
+    public FrogController fc;
+    private bool alreadyWon = false;
     void Start()
     {
         health = maxHealth;
@@ -37,8 +39,16 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             if (gameObject.tag == "Gamabunta") {
+                alreadyWon = true;
                 youWon.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
+                if (fc) 
+                {
+                    fc.Smashed();
+                    fc.Guts();
+                }
+                if (GameObject.Find("Canvas")) healthBarUI.active = false;
+                GetComponent<FinalBoss>().enabled = false;
                 // add guts animation
             } else {
                 Destroy(gameObject);

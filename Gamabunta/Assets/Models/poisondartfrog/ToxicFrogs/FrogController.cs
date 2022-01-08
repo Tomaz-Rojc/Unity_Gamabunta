@@ -27,8 +27,8 @@ public class FrogController : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider coll) {
-        if (coll.tag == "Player") {
-            coll.GetComponent<Player>().TakeDamage(30);
+        if (coll.tag == "Player" && GetComponent<FinalBoss>().enabled) {
+            coll.GetComponent<Player>().TakeDamage(10);
         }
     }
 
@@ -70,7 +70,7 @@ public class FrogController : MonoBehaviour
     public void Smashed()
     {
         RootMotion();
-        DestroyGuts();
+        // DestroyGuts();
         anim.SetTrigger("Smashed");
         Guts();
     }
@@ -89,9 +89,15 @@ public class FrogController : MonoBehaviour
         anim.SetTrigger("TurnRight");
     }
 
+
+    private bool won = false;
     public void Guts()
     {
-        Invoke("SpreadGuts", 0.1f);
+        if (!won)
+        {
+            Invoke("SpreadGuts", 0.1f);
+            won = true;
+        }
     }
 
     void SpreadGuts()

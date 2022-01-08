@@ -93,7 +93,7 @@ public class FinalBoss : MonoBehaviour
             // Attack code
             Rigidbody rb = Instantiate(projectile, transform.position + new Vector3(0, 4, 0), Quaternion.identity).GetComponent<Rigidbody>();
             rb.AddForce(transform.forward * 20f, ForceMode.Impulse);
-            rb.AddForce(transform.up * -2f, ForceMode.Impulse);
+            rb.AddForce(transform.up * -4f, ForceMode.Impulse);
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);

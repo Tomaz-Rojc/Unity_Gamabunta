@@ -66,8 +66,6 @@ public class EnemyBullet : MonoBehaviour
         GetComponent<SphereCollider>().material = physics_mat;
 
         rb.useGravity = useGravity;
-
-        transform.rotation = GetComponentInParent<Enemy>().transform.rotation;
     }
 
     private void OnDrawGizmosSelected()

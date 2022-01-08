@@ -24,8 +24,6 @@ public class Player : MonoBehaviour
 
     public AnimationManagerUI anim;
 
-
-    private bool canSwitchAnim = true; 
     void Start()
     {
         health = maxHealth;
@@ -48,6 +46,7 @@ public class Player : MonoBehaviour
             keysDisplay.SetText("Keys: " + keys);
         if (keys >= 5) {
             BossDoorAnimator.SetBool("openBossDoor", true);
+            GameObject.Find("Gamabunta").GetComponent<FinalBoss>().enabled = true;
         }
         
         healthSlider.value = health/maxHealth;

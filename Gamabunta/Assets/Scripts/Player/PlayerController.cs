@@ -168,6 +168,8 @@ public class PlayerController : MonoBehaviour
             isDashing = false;
         }
 
+        if (Input.GetKey(KeyCode.V)) anim.SetAnimation_WinPose();
+
         // add gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
