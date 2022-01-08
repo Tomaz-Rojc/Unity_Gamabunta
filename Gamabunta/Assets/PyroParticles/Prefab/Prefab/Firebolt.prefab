@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 429324}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &19813804
 ParticleSystem:
@@ -4997,9 +4997,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 469746}
-  - {fileID: 462970}
   - {fileID: 424326}
+  - {fileID: 462970}
+  - {fileID: 469746}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5331,7 +5331,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 429324}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &19843370
 ParticleSystem:
@@ -10164,6 +10164,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e03644fdf51cfd34f8fdc92879c31a14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  whatIsEnemies:
+    serializedVersion: 2
+    m_Bits: 0
+  whatIsCrates:
+    serializedVersion: 2
+    m_Bits: 0
+  bounciness: 0
+  useGravity: 0
+  explosionDamage: 0
+  explosionRange: 0
+  maxCollisions: 0
+  maxLifetime: 0
+  explodeOnTouch: 1
 --- !u!54 &5471416
 Rigidbody:
   m_ObjectHideFlags: 0

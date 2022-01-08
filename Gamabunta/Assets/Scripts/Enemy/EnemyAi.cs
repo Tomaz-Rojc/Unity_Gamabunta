@@ -85,10 +85,12 @@ public class EnemyAi : MonoBehaviour
 
         if (!alreadyAttacked)
         {
+            Vector3 attackStartPoint = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
+
             // Attack code
-            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+            Rigidbody rb = Instantiate(projectile, attackStartPoint, Quaternion.identity).GetComponent<Rigidbody>();
             rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-            rb.AddForce(transform.up * 8f, ForceMode.Impulse);
+            rb.AddForce(transform.up * -1f, ForceMode.Impulse);
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
