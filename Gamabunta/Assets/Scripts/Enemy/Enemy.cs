@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour
     public int restoreMana;
     public int restoreHealth;
 
+    public GameObject youWon;
+
     void Start()
     {
         health = maxHealth;
@@ -34,9 +36,13 @@ public class Enemy : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(gameObject);
-            player.GetComponentInChildren<Weapon>().bulletsLeft += restoreMana;
-            player.health += restoreHealth;
+            if (gameObject.tag == "Gamabunta") {
+                youWon.SetActive(true); 
+            } else {
+                Destroy(gameObject);
+                player.GetComponentInChildren<Weapon>().bulletsLeft += restoreMana;
+                player.health += restoreHealth;
+            }
         }
 
         if (health > maxHealth)

@@ -13,6 +13,14 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI healthDisplay;
     public Animator BossDoorAnimator;
 
+    public Slider healthSlider;
+
+    public GameObject blood1;
+    public GameObject blood2;
+    public GameObject blood3;
+    public GameObject blood4;
+    public GameObject bloodGradient;
+
     void Start()
     {
         health = maxHealth;
@@ -34,7 +42,9 @@ public class Player : MonoBehaviour
         if (keys >= 5) {
             BossDoorAnimator.SetBool("openBossDoor", true);
         }
-        //Debug.Log("Health " + health);
+        
+        healthSlider.value = health/maxHealth;
+        decreaseColor();
     }
 
     public void TakeDamage(int damage)
@@ -42,5 +52,54 @@ public class Player : MonoBehaviour
         damage = damage - armor;
         if (damage <= 0) damage = 1;
         health -= damage;
+
+        Debug.Log("Damage taken");
+        bloodEffect();
+    }
+
+    public void bloodEffect()
+    {
+        var color = blood1.GetComponent<Image>().color;
+        color.a = 0.8f;
+        blood1.GetComponent<Image>().color = color;
+
+        color = blood2.GetComponent<Image>().color;
+        color.a = 0.8f;
+        blood2.GetComponent<Image>().color = color;
+
+        color = blood3.GetComponent<Image>().color;
+        color.a = 0.8f;
+        blood3.GetComponent<Image>().color = color;
+
+        color = blood4.GetComponent<Image>().color;
+        color.a = 0.8f;
+        blood4.GetComponent<Image>().color = color;
+
+        color = bloodGradient.GetComponent<Image>().color;
+        color.a = 0.8f;
+        bloodGradient.GetComponent<Image>().color = color;
+    }
+
+    public void decreaseColor()
+    {
+        var color = blood1.GetComponent<Image>().color;
+        color.a -= 0.01f;
+        blood1.GetComponent<Image>().color = color;
+
+        color = blood2.GetComponent<Image>().color;
+        color.a -= 0.01f;
+        blood2.GetComponent<Image>().color = color;
+
+        color = blood3.GetComponent<Image>().color;
+        color.a -= 0.01f;
+        blood3.GetComponent<Image>().color = color;
+
+        color = blood4.GetComponent<Image>().color;
+        color.a -= 0.01f;
+        blood4.GetComponent<Image>().color = color;
+
+        color = bloodGradient.GetComponent<Image>().color;
+        color.a -= 0.005f;
+        bloodGradient.GetComponent<Image>().color = color;
     }
 }
