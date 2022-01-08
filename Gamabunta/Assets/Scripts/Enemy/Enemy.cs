@@ -37,7 +37,8 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             if (gameObject.tag == "Gamabunta") {
-                youWon.SetActive(true); 
+                youWon.SetActive(true);
+                // add guts animation
             } else {
                 Destroy(gameObject);
                 player.GetComponentInChildren<Weapon>().bulletsLeft += restoreMana;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -172,11 +172,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!20 &21100429 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 8108310055398310647, guid: 1df6844571d61dc4eaed7bccc822dda6, type: 3}
-  m_PrefabInstance: {fileID: 9080617862674653444}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &32318284 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8532834791354018572, guid: c4e915038d12911409bcdfd15af178b7, type: 3}
@@ -9094,7 +9089,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1463591104
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9478,7 +9473,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1524089050}
-  m_LocalRotation: {x: 0.11775437, y: 0.000000004271669, z: -5.065317e-10, w: 0.99304277}
+  m_LocalRotation: {x: 0.11775437, y: -0.000000004271668, z: 5.065316e-10, w: 0.99304277}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -12201,6 +12196,7 @@ MonoBehaviour:
   weapon: {fileID: 0}
   restoreMana: 0
   restoreHealth: 0
+  youWon: {fileID: 1463591103}
 --- !u!195 &3928488780979518215
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -12362,7 +12358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6831026021736480944, guid: 1df6844571d61dc4eaed7bccc822dda6, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8108310055375180680, guid: 1df6844571d61dc4eaed7bccc822dda6, type: 3}
       propertyPath: m_Layer
@@ -12375,7 +12371,7 @@ PrefabInstance:
     - target: {fileID: 8108310055375180682, guid: 1df6844571d61dc4eaed7bccc822dda6, type: 3}
       propertyPath: fpsCam
       value: 
-      objectReference: {fileID: 21100429}
+      objectReference: {fileID: 789733373}
     - target: {fileID: 8108310055375180682, guid: 1df6844571d61dc4eaed7bccc822dda6, type: 3}
       propertyPath: enemyHitbox
       value: 
@@ -12422,11 +12418,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8108310055398310640, guid: 1df6844571d61dc4eaed7bccc822dda6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -8.534863e-10
+      value: 8.534863e-10
       objectReference: {fileID: 0}
     - target: {fileID: 8108310055398310640, guid: 1df6844571d61dc4eaed7bccc822dda6, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -1.1695098e-10
+      value: 1.1695098e-10
       objectReference: {fileID: 0}
     - target: {fileID: 8108310055398310641, guid: 1df6844571d61dc4eaed7bccc822dda6, type: 3}
       propertyPath: m_Enabled
