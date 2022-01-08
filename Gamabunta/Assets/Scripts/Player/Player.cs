@@ -21,6 +21,10 @@ public class Player : MonoBehaviour
     public GameObject blood4;
     public GameObject bloodGradient;
 
+    public AnimationManagerUI anim;
+
+
+    private bool canSwitchAnim = true; 
     void Start()
     {
         health = maxHealth;
@@ -53,6 +57,7 @@ public class Player : MonoBehaviour
         if (damage <= 0) damage = 1;
         health -= damage;
 
+        anim.SetAnimation_Damage();
         Debug.Log("Damage taken");
         bloodEffect();
     }

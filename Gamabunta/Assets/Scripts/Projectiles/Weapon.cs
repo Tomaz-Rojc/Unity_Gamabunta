@@ -33,6 +33,8 @@ public class Weapon : MonoBehaviour
     // Bug fixing
     public bool allowInvoke = true;
 
+    public AnimationManagerUI anim;
+
     private void Awake()
     {
         // Fill up ammo
@@ -72,6 +74,8 @@ public class Weapon : MonoBehaviour
 
     private void Shoot()
     {
+        anim.SetAnimation_WinPose();
+
         readyToShoot = false;
 
         // Find the exact hit position using a raycast

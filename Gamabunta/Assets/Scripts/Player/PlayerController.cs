@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
         }
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
+            anim.SetAnimation_Jump();
             MySoundManager.PlaySound("jump");
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             dashTime = -dashCooldown;
@@ -86,6 +87,7 @@ public class PlayerController : MonoBehaviour
             doubleJumped = true;
             canDash = true;
             dashTime = -dashCooldown;
+            anim.SetAnimation_Jump();
         }
 
         // reset x, z velocity
@@ -98,6 +100,7 @@ public class PlayerController : MonoBehaviour
         // dash activation
         if (canDash && dashTime <= -dashCooldown && Input.GetKeyDown(KeyCode.LeftControl))
         {
+            anim.SetAnimation_Hit03();
             MySoundManager.PlaySound("dash");
             velocity += (transform.right * ha + transform.forward * va) * dashSpeed;
             dashTime = dashFullTime;
@@ -110,7 +113,6 @@ public class PlayerController : MonoBehaviour
         {
             stamina -= Time.deltaTime;
             if (stamina > 0.2f) speed = runSpeed;
-            anim.SetAnimation_Walk();
         }
         else
         {
@@ -127,11 +129,11 @@ public class PlayerController : MonoBehaviour
             )
         {
             isMoving = true;
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift) && stamina > 0.2f && isGrounded && !isDashing)
             {
                 anim.SetAnimation_Run();
             }
-            else
+            else if (isGrounded && !isDashing)
             {
                 anim.SetAnimation_Walk();
             }
@@ -139,7 +141,9 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            anim.SetAnimation_Idle();
+            if(isGrounded && !isDashing) {
+                anim.SetAnimation_Idle();
+            }
             isMoving = false;
         }
 
