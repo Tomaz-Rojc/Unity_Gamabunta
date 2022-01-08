@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     bool isMoving = false;
 
     public AnimationManagerUI anim;
-        
+
 
     // Start is called before the first frame update
     void Start()
@@ -50,31 +50,36 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
+    {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         float ha = Input.GetAxis("Horizontal");
         float va = Input.GetAxis("Vertical");
 
         // reset fall speed
-        if (isGrounded && velocity.y < 0) {
+        if (isGrounded && velocity.y < 0)
+        {
             velocity.y = 0f;
         }
 
         // jump, double jump
-        if (isGrounded) {
+        if (isGrounded)
+        {
             doubleJumped = false;
-			canDoubleJump = false;
-			canDash = true;
+            canDoubleJump = false;
+            canDash = true;
         }
-        if(isGrounded && Input.GetKeyDown(KeyCode.Space)) {
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+        {
             MySoundManager.PlaySound("jump");
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             dashTime = -dashCooldown;
         }
-        if (!isGrounded && !doubleJumped) {
-			canDoubleJump = true;
-		}
-        if (canDoubleJump && Input.GetKeyDown(KeyCode.Space)) {
+        if (!isGrounded && !doubleJumped)
+        {
+            canDoubleJump = true;
+        }
+        if (canDoubleJump && Input.GetKeyDown(KeyCode.Space))
+        {
             MySoundManager.PlaySound("jump");
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             canDoubleJump = false;
@@ -84,13 +89,15 @@ public class PlayerController : MonoBehaviour
         }
 
         // reset x, z velocity
-        if (!isDashing) {
+        if (!isDashing)
+        {
             velocity.x = 0f;
             velocity.z = 0f;
         }
 
         // dash activation
-        if (canDash && dashTime <= -dashCooldown && Input.GetKeyDown(KeyCode.LeftControl)) {
+        if (canDash && dashTime <= -dashCooldown && Input.GetKeyDown(KeyCode.LeftControl))
+        {
             MySoundManager.PlaySound("dash");
             velocity += (transform.right * ha + transform.forward * va) * dashSpeed;
             dashTime = dashFullTime;
@@ -99,10 +106,14 @@ public class PlayerController : MonoBehaviour
         }
 
         // handle running
-        if (Input.GetKey(KeyCode.LeftShift) && stamina > 0) {
+        if (Input.GetKey(KeyCode.LeftShift) && stamina > 0)
+        {
             stamina -= Time.deltaTime;
             if (stamina > 0.2f) speed = runSpeed;
-        } else {
+            anim.SetAnimation_Walk();
+        }
+        else
+        {
             speed = moveSpeed;
             if (stamina < 2) stamina += Time.deltaTime;
         }
@@ -116,14 +127,25 @@ public class PlayerController : MonoBehaviour
             )
         {
             isMoving = true;
-            anim.SetAnimation_Walk();
-        } else
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                anim.SetAnimation_Run();
+            }
+            else
+            {
+                anim.SetAnimation_Walk();
+            }
+
+        }
+        else
         {
+            anim.SetAnimation_Idle();
             isMoving = false;
         }
 
-    	// move left, right, forward, backward
-        if (!isDashing && isMoving) {
+        // move left, right, forward, backward
+        if (!isDashing && isMoving)
+        {
             // Vector3 move = transform.right * ha + transform.forward * va;
             Vector3 move = new Vector3(ha, 0f, va).normalized;
             // controller.Move(move * speed * Time.deltaTime);
@@ -136,8 +158,9 @@ public class PlayerController : MonoBehaviour
         }
 
         dashTime -= Time.deltaTime;
-        if (isDashing && dashTime <= 0) {
-        // dash just ended
+        if (isDashing && dashTime <= 0)
+        {
+            // dash just ended
             isDashing = false;
         }
 
