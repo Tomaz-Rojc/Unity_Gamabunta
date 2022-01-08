@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public static int keys = 0;
 
     public TextMeshProUGUI healthDisplay;
+    public TextMeshProUGUI keysDisplay;
     public Animator BossDoorAnimator;
 
     public Slider healthSlider;
@@ -42,7 +43,9 @@ public class Player : MonoBehaviour
             health = maxHealth;
 
         if (healthDisplay != null)
-            healthDisplay.SetText("HP: " + health + " / " + maxHealth);
+            healthDisplay.SetText("Health: " + health + " / " + maxHealth);
+        if (keysDisplay != null)
+            keysDisplay.SetText("Keys: " + keys);
         if (keys >= 5) {
             BossDoorAnimator.SetBool("openBossDoor", true);
         }
